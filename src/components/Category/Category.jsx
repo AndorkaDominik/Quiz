@@ -11,6 +11,7 @@ import QuizMaster from '../QuizMaster/QuizMaster';
 
 import { GoArrowRight } from "react-icons/go";
 
+// Category SVGs
 import Cinema from '../../assets/Category/popcorn.svg';
 import Tech from '../../assets/Category/tech.svg';
 import Math from '../../assets/Category/math.svg';
@@ -20,6 +21,17 @@ import Science from '../../assets/Category/science.svg';
 import Geography from '../../assets/Category/geo.svg';
 import Music from '../../assets/Category/microphone1.svg';
 import History from '../../assets/Category/history.svg';
+import Architecture from '../../assets/Category/architecture.svg';
+import Climate from '../../assets/Category/climate.svg';
+import Literature from '../../assets/Category/literature.svg';
+import Fashion from '../../assets/Category/fashion.svg';
+import Vehicle from '../../assets/Category/vehicle.svg';
+import Bugs from '../../assets/Category/bug.svg';
+import Fish from '../../assets/Category/fish.svg';
+import Food from '../../assets/Category/food.svg';
+import MakeUp from '../../assets/Category/makeUp.svg';
+
+// Logo
 import Logo from '../../assets/logo.svg'
 
 const Category = ({quizTitle, name, handleCategorySelect, handleNameChange, handleLanguageChange, currentLanguage, translations}) => {
@@ -86,6 +98,18 @@ const Category = ({quizTitle, name, handleCategorySelect, handleNameChange, hand
               <img src={Science} alt="" />
               <h4>{translations.science}</h4>
             </button>
+            <button className='single' onClick={() => handleCategorySelect("architecture")}>
+              <img src={Architecture} alt="" />
+              <h4>{translations.architecture}</h4>
+            </button>
+            <button className='single' onClick={() => handleCategorySelect("climate")}>
+              <img src={Climate} alt="" />
+              <h4>{translations.climate}</h4>
+            </button>
+            <button className='single' onClick={() => handleCategorySelect("makeUp")}>
+              <img src={MakeUp} alt="" />
+              <h4>{translations.makeUp}</h4>
+            </button>
           </div>
           <h3>Explore</h3>
           <div className='single-wrapper'>
@@ -108,6 +132,30 @@ const Category = ({quizTitle, name, handleCategorySelect, handleNameChange, hand
             <button className='single' onClick={() => handleCategorySelect("history")}>
               <img src={History} alt="" />
               <h4>{translations.history}</h4>
+            </button>
+            <button className='single' onClick={() => handleCategorySelect("literature")}>
+              <img src={Literature} alt="" />
+              <h4>{translations.literature}</h4>
+            </button>
+            <button className='single' onClick={() => handleCategorySelect("fashion")}>
+              <img src={Fashion} alt="" />
+              <h4>{translations.fashion}</h4>
+            </button>
+            <button className='single' onClick={() => handleCategorySelect("vehicle")}>
+              <img src={Vehicle} alt="" />
+              <h4>{translations.vehicle}</h4>
+            </button>
+            <button className='single' onClick={() => handleCategorySelect("bugs")}>
+              <img src={Bugs} alt="" />
+              <h4>{translations.bugs}</h4>
+            </button>
+            <button className='single' onClick={() => handleCategorySelect("fish")}>
+              <img src={Fish} alt="" />
+              <h4>{translations.fish}</h4>
+            </button>
+            <button className='single' onClick={() => handleCategorySelect("food")}>
+              <img src={Food} alt="" />
+              <h4>{translations.food}</h4>
             </button>
           </div>
           {storedStatus ? <QuizMaster translations={translations} /> : <Award translations={translations}/>}
