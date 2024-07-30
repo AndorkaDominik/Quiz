@@ -1,0 +1,228 @@
+#mysterious-award h3{
+    margin: .5rem 0;
+}
+
+#mysterious-award p {
+    margin-bottom: 0;
+    color: var(--white);
+    opacity: .8;
+}
+#mysterious-award .award-intro p{
+    font-size: large;
+}
+
+#mysterious-award .right{
+    gap: 0;
+}
+
+.award-section {
+    display: grid;
+    grid-template-columns: 1fr 0.7fr;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 0.2rem solid var(--color-tertiary);
+    background: rgba(21, 28, 39, 0.4);
+    backdrop-filter: blur(0.25rem);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+.award-section .right p {
+    font-size: medium;
+    text-align: center;
+}
+
+#laurel{
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+}
+
+#question {
+    width: 100px;
+    height: auto;
+}
+
+.challenge-details {
+    margin-bottom: 2rem;
+}
+
+#mysterious-award .challenge-details h3 {
+    font-weight: 500;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.challenge-details ul {
+    padding: 0;
+    list-style-type: none;
+    font-size: 16px;
+}
+
+.challenge-details li {
+    background: var(--color-secondary);
+    border: 0.2rem solid var(--color-tertiary);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.award-teaser {
+    text-align: center;
+}
+
+.award-teaser h3 {
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.award-teaser p {
+    font-size: 18px;
+    margin-bottom: 1rem;
+}
+
+.award-teaser img {
+    max-width: 150px;
+    width: 100%;
+    height: auto;
+}
+
+.progress-tracker {
+    margin-bottom: 2rem;
+}
+
+.progress-tracker h3 {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.progress-tracker .tracker {
+    background: #ddd;
+    border-radius: 5px;
+    height: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar {
+    background: var(--color-primary);
+    height: 100%;
+    width: 0;
+}
+
+.motivation {
+    text-align: center;
+}
+
+.motivation h3 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.award-section button {
+    color: var(--bg-body);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    padding-inline: 1.6rem 1.4rem;
+    background-color: hsl(0, 0%, 75%);
+    border-radius: 0.6rem;
+    transition: 0.3s ease-in;
+    cursor: pointer;
+        outline: none;
+        user-select: none;
+}
+
+.award-section button:hover {
+    background-color: var(--white);
+    box-shadow: 0 0.2rem 2rem 0 rgba(30, 41, 55, 0.9);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .award-section {
+        grid-template-columns: 1fr;
+        grid-template-rows: .5fr 1fr;
+        padding: 15px;
+    }
+
+    .award-section h2 {
+        font-size: 20px;
+    }
+
+    .award-section .right h3 {
+        font-size: 30px;
+    }
+
+    .award-section .right p {
+        font-size: 16px;
+    }
+
+    .award-intro-content {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .award-intro img,
+    #question {
+        width: 80px;
+    }
+
+    .challenge-details li {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .award-section button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .award-section {
+        padding: 10px;
+    }
+
+    .award-section h2 {
+        font-size: 18px;
+    }
+
+    .award-section .right h3 {
+        font-size: 24px;
+    }
+
+    .award-section .right p {
+        font-size: 14px;
+    }
+
+    .award-intro img,
+    #question {
+        width: 60px;
+    }
+
+    .challenge-details li {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .award-section button {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
+@media (max-width: 280px) {
+    #mysterious-award h3{
+        font-size: 20px;
+    }
+
+}

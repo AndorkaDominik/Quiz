@@ -1,0 +1,274 @@
+import React, { useState, useRef } from 'react';
+import './quiz.css';
+import { data, translations } from '../../assets/data';
+import blur1 from '../../assets/Blur/blur-1.svg';
+
+import Cinema from '../../assets/Category/popcorn.svg';
+import Tech from '../../assets/Category/tech.svg';
+import Math from '../../assets/Category/math.svg';
+import Sport from '../../assets/Category/sport.svg';
+import Knowledge from '../../assets/Category/knowledge.svg';
+import Science from '../../assets/Category/science.svg';
+import Geography from '../../assets/Category/geo.svg';
+import Music from '../../assets/Category/microphone1.svg';
+import Logo from '../../assets/logo.svg';
+
+const Quiz = () => {
+  const [index, setIndex] = useState(0);
+  const [question, setQuestion] = useState(null);
+  const [lock, setLock] = useState(false);
+  const [score, setScore] = useState(0);
+  const [result, setResult] = useState(false);
+  const [language, setLanguage] = useState(null);
+
+  const [incorrectAnswers, setIncorrectAnswers] = useState([]);
+  const [selectedQuestions, setSelectedQuestions] = useState([]);
+
+  const [name, setName] = useState('');  // State for user's name
+
+  const [category, setCategory] = useState("");
+
+  const Option1 = useRef(null);
+  const Option2 = useRef(null);
+  const Option3 = useRef(null);
+  const Option4 = useRef(null);
+
+  const option_array = [Option1, Option2, Option3, Option4];
+
+  const selectLanguage = (lang) => {
+    setLanguage(lang);
+    const allQuestions = data[lang];
+    const questions = getRandomQuestions(allQuestions, 10);
+    setSelectedQuestions(questions);
+    setQuestion(questions[0]);
+    setIndex(0);
+    setIncorrectAnswers([]);
+  };
+
+
+
+  const getRandomQuestions = (questions, maxQuestions) => {
+  // Shuffle the array and get the first `maxQuestions` items
+  const shuffled = questions.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, maxQuestions);
+  };
+
+  const checkAns = (e, ans) => {
+  if (!lock) {
+    const selectedAnswer = question[`option${ans}`];
+    const correctAnswer = question[`option${question.ans}`];
+
+    if (question.ans === ans) {
+      e.target.classList.add("correct");
+      setLock(true);
+      setScore(prev => prev + 1);
+    } else {
+      e.target.classList.add("wrong");
+      setLock(true);
+      option_array[question.ans - 1].current.classList.add("correct");
+
+      // // Log the selected and correct answers once
+      // console.log("Selected Answer:", selectedAnswer);
+      // console.log("Correct Answer:", correctAnswer);
+
+      // Add incorrect answer to the list
+      setIncorrectAnswers(prev => {
+        const newIncorrectAnswer = {
+          question: question.question,
+          selected: selectedAnswer,
+          correct: correctAnswer
+        };
+        return [...prev, newIncorrectAnswer];
+      });
+    }
+  }
+};
+
+  const next = () => {
+  if (index === selectedQuestions.length - 1) {
+    setResult(true);
+    return;
+  }
+  if (lock) {
+    const nextIndex = index + 1;
+    setIndex(nextIndex);
+    setQuestion(selectedQuestions[nextIndex]);
+    setLock(false);
+    option_array.forEach(option => {
+      option.current.classList.remove("wrong");
+      option.current.classList.remove("correct");
+    });
+  }
+};
+
+  const reset = () => {
+    setIndex(0);
+    setQuestion(null);
+    setScore(0);
+    setLock(false);
+    setResult(false);
+    setLanguage(null);
+  };
+
+  const handleNameSubmit = (e) => {
+    e.preventDefault();
+    const enteredName = e.target.elements.name.value; // Capture the value directly from the form input
+    setName(enteredName); // Update the state with the new value
+    if (name.trim() !== '') {
+      // Proceed to language selection
+      selectLanguage('ENG'); // or any default language if needed
+    }
+  };
+
+
+  if (!name) {
+    return (
+      <div className="wrapper">
+          <div className='container'>
+          <h1 className='language-title'>Welcome</h1>
+          <p>Please, enter your nickname to start the session.</p>
+          <form onSubmit={handleNameSubmit}>
+            <input
+            type="text"
+            name="name" 
+            placeholder="Enter your name"
+            required
+            />
+            <button type="submit">Start Quiz</button>
+          </form>
+          <img src={blur1} className='blur1' alt="" />
+        </div>
+      </div>
+    );
+  }
+
+  if (!language) {
+    return (
+      <div className="wrapper">
+      <div className='container language-container'>
+        <h1 className='language-title'>Hello, {name}</h1>
+        <h3 className='language-title'>{translations.ENG.selectLanguage}</h3>
+        <p className="creator-title align">{translations.ENG.beforeCreator} {translations.ENG.creator}</p>
+        <button onClick={() => selectLanguage('HUN')}>{translations.HUN.hungarian}</button>
+        <button onClick={() => selectLanguage('ENG')}>{translations.ENG.english}</button>
+        <button onClick={() => selectLanguage('GER')}>{translations.GER.german}</button>
+        <img src={blur1} className='blur1' alt="" />
+      </div>
+      </div>
+    );
+  }
+
+  if (!category) {
+    return (
+      <div className='category-container'>
+        
+        <h1 className='language-title'><img src={Logo} alt="" /> {translations[language].quizTitle}</h1>
+        
+        <h3>Hello, {name} 👋</h3>
+        <h2>Let's Play</h2>
+
+        <div className="best">
+
+          <div className='left'>
+          <h2>Choose the best quiz</h2>
+          </div>
+
+          <div  className="right relative">
+              <img src={blur1} className='blur1' alt="" />
+            <button className='category-card' onClick={() => setCategory("cinema")}>
+              <div className='card-title'>
+                <img src={Cinema} alt="" />
+                <h4>Cinema</h4>
+              </div>
+              <p>Start now {"->"}</p>
+            </button>
+            <button className='category-card' onClick={() => setCategory("sport")}>
+              <div className='card-title'>
+                <img src={Sport} alt="" />
+                <h4>Sports</h4>
+              </div>
+              <p>Start now {"->"}</p>
+            </button>
+          </div>
+        </div>
+
+        <h3>Recently Added</h3>
+        <div className='single-wrapper'>
+          <button className='single' onClick={() => setCategory("tech")}>
+            <img src={Tech} alt="" />
+            <h4>Tech</h4>
+          </button>
+          <button className='single' onClick={() => setCategory("science")}>
+            <img src={Science} alt="" />
+            <h4>Science</h4>
+          </button>
+        </div>
+        <h3>Explore</h3>
+        <div className='single-wrapper'>
+          <button className='single' onClick={() => setCategory("math")}>
+            <img src={Math} alt="" />
+            <h4>Mathematics</h4>
+          </button>
+          <button className='single' onClick={() => setCategory("knowledge")}>
+            <img src={Knowledge} alt="" />
+            <h4>Knowledge</h4>
+          </button>
+          <button className='single' onClick={() => setCategory("music")}>
+            <img src={Music} alt="" />
+            <h4>Music</h4>
+          </button>
+          <button className='single' onClick={() => setCategory("geography")}>
+            <img src={Geography} alt="" />
+            <h4>Geography</h4>
+          </button>
+        </div>
+
+      </div>
+    );
+  }
+
+ return (
+  <div className='container'>
+  <div className="wrapper">
+    <h1>{translations[language].quizTitle}</h1>
+    <h4 className="creator-title">{translations[language].beforeCreator} {translations[language].creator}</h4>
+    <hr />
+    {result ? 
+      <>    
+        <h2>{translations[language].score} {score}{translations[language].outOf} {selectedQuestions.length}</h2>
+        <button onClick={reset}>{translations[language].reset}</button>
+        
+        <div className="incorrect-answers">
+          <h3>{translations[language].incorrectAnswers}</h3>
+          <ul>
+            {incorrectAnswers.map((item, index) => (
+              <li key={index} id='li'>
+                <p><strong>Question:</strong> {item.question}</p>
+                <p id='red'><strong>Your Answer:</strong> {item.selected}</p>
+                <p id='green'><strong>Correct Answer:</strong> {item.correct}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </> :
+      <div className='relative'>
+        <h2>{index + 1}. {question.question}</h2>
+        <ul>
+          <li ref={Option1} onClick={(e) => checkAns(e, 1)}>{question.option1}</li>
+          <li ref={Option2} onClick={(e) => checkAns(e, 2)}>{question.option2}</li>
+          <li ref={Option3} onClick={(e) => checkAns(e, 3)}>{question.option3}</li>
+          <li ref={Option4} onClick={(e) => checkAns(e, 4)}>{question.option4}</li>
+        </ul>
+        <button onClick={next}>{translations[language].next}</button>
+        <div className="index">{index + 1} of {selectedQuestions.length} questions</div>
+        <img src={blur1} className='blur1' alt="" />
+      </div>
+    }
+  </div>
+  </div>
+
+);
+
+}
+
+export default Quiz;

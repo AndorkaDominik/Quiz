@@ -1,6 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './quiz.css';
-import { data, translations } from '../../assets/data';
+import { categories, translations } from '../../assets/data';
+
+
+/// Components
+import Name from '../Name/Name';
+import Language from '../Language/Language';
+import Category from '../Category/Category';
+
+/// Quiz Master Reward
+import Crown from '../../assets/crown.svg';
+
 
 const Quiz = () => {
   const [index, setIndex] = useState(0);
@@ -9,6 +19,11 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [result, setResult] = useState(false);
   const [language, setLanguage] = useState(null);
+  const [category, setCategory] = useState("");
+  const [selectedQuestions, setSelectedQuestions] = useState([]);
+  const [incorrectAnswers, setIncorrectAnswers] = useState([]);
+  const [name, setName] = useState('');
+  const [quizMaster, setQuizMaster] = useState(false);
 
   const Option1 = useRef(null);
   const Option2 = useRef(null);
@@ -19,11 +34,20 @@ const Quiz = () => {
 
   const selectLanguage = (lang) => {
     setLanguage(lang);
-    setQuestion(data[lang][0]);
+    localStorage.setItem('language', lang);
+    scrollToTop();
+  };
+
+  const getRandomQuestions = (questions, maxQuestions) => {
+    const shuffled = questions.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, maxQuestions);
   };
 
   const checkAns = (e, ans) => {
     if (!lock) {
+      const selectedAnswer = question[`option${ans}`];
+      const correctAnswer = question[`option${question.ans}`];
+
       if (question.ans === ans) {
         e.target.classList.add("correct");
         setLock(true);
@@ -32,24 +56,41 @@ const Quiz = () => {
         e.target.classList.add("wrong");
         setLock(true);
         option_array[question.ans - 1].current.classList.add("correct");
+
+        setIncorrectAnswers(prev => {
+          const newIncorrectAnswer = {
+            question: question.question,
+            selected: selectedAnswer,
+            correct: correctAnswer
+          };
+          return [...prev, newIncorrectAnswer];
+        });
       }
     }
   };
-
   const next = () => {
-    if (index === data[language].length - 1) {
+    if (index === selectedQuestions.length - 1) {
       setResult(true);
+
+      if (score === selectedQuestions.length) {
+        localStorage.setItem('quizMaster', 'true');
+        setQuizMaster(true);
+      }
       return;
     }
     if (lock) {
-      setIndex(index + 1);
-      setQuestion(data[language][index + 1]);
+      const nextIndex = index + 1;
+      setIndex(nextIndex);
+      setQuestion(selectedQuestions[nextIndex]);
       setLock(false);
       option_array.forEach(option => {
-        option.current.classList.remove("wrong");
-        option.current.classList.remove("correct");
+        if (option.current) {
+          option.current.classList.remove("wrong");
+          option.current.classList.remove("correct");
+        }
       });
-    }
+      
+    } 
   };
 
   const reset = () => {
@@ -58,45 +99,146 @@ const Quiz = () => {
     setScore(0);
     setLock(false);
     setResult(false);
-    setLanguage(null);
+    setCategory("");
+    scrollToTop();
   };
 
-  if (!language) {
+  const handleNameSubmit = (e) => {
+    e.preventDefault();
+    const enteredName = e.target.elements.name.value; 
+    localStorage.setItem('name', enteredName);
+    setName(enteredName); 
+    if (enteredName.trim() !== '') {
+      setLanguage(null);
+    }
+  };
+
+  const handleNameChange = () => {
+    setName('');
+    localStorage.removeItem('name');
+    setLanguage('')
+    localStorage.removeItem('language');
+    setQuizMaster(false);
+    localStorage.removeItem('quizMaster');
+  }
+
+  const handleLanguageChange = (e) => {
+    const newLanguage = e.target.value;
+    setLanguage(newLanguage);
+    localStorage.setItem('language', newLanguage);
+  };
+
+
+  const handleCategorySelect = (category) => {
+    setCategory(category);
+    const allQuestions = categories[category][language];
+    const questions = getRandomQuestions(allQuestions, 5);
+    setSelectedQuestions(questions);
+    setQuestion(questions[0]);
+    setIndex(0);
+    setIncorrectAnswers([]);
+    scrollToTop();
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+    });
+  };
+
+   useEffect(() => {
+    const storedName = localStorage.getItem('name');
+    const storedLanguage = localStorage.getItem('language');
+    const storedQuizMaster = localStorage.getItem('quizMaster');
+
+    if (storedName) setName(storedName);
+    if (storedLanguage) setLanguage(storedLanguage);
+    if (storedQuizMaster === 'true') setQuizMaster(true);
+  }, [name, language, quizMaster]);
+
+  const storedStatus = localStorage.getItem('quizMaster');
+
+
+  if (!name) {
     return (
-      <div className='container language-container'>
-        <h1 className='language-title'>{translations.ENG.selectLanguage}</h1>
-        <h4 className="creator-title align">{translations.ENG.beforeCreator} {translations.ENG.creator}</h4>
-        <button onClick={() => selectLanguage('HUN')}>{translations.HUN.hungarian}</button>
-        <button onClick={() => selectLanguage('ENG')}>{translations.ENG.english}</button>
-        <button onClick={() => selectLanguage('GER')}>{translations.GER.german}</button>
-      </div>
+      <Name handleNameSubmit={handleNameSubmit} />
     );
   }
 
+  if (!language) {
+    return (
+      <Language 
+        name={name} 
+        title={translations.ENG.selectLanguage} 
+        beforeC={translations.ENG.beforeCreator} 
+        creator={translations.ENG.creator} 
+        hun={translations.HUN.hungarian} 
+        eng={translations.ENG.english}
+        ger={translations.GER.german}
+        selectLanguage={selectLanguage}
+      />
+    );
+  }
+
+  if (!category) {
+    return (
+      <Category 
+        quizTitle={translations[language].quizTitle}
+        translations={translations[language]}
+        name={name}
+        handleCategorySelect={handleCategorySelect}
+        handleNameChange={handleNameChange}
+        handleLanguageChange={handleLanguageChange} 
+        currentLanguage={language}
+      />
+    );
+  }
+  
   return (
-    <div className='container'>
-      <h1>{translations[language].quizTitle}</h1>
-      <h4 className="creator-title">{translations[language].beforeCreator} {translations[language].creator}</h4>
-      <hr />
-      {result ? 
-        <>
-          <h2>{translations[language].score} {score}{translations[language].outOf} {data[language].length}</h2>
-          <button onClick={reset}>{translations[language].reset}</button>
-        </> :
-        <>
-          <h2>{index + 1}. {question.question}</h2>
-          <ul>
-            <li ref={Option1} onClick={(e) => checkAns(e, 1)}>{question.option1}</li>
-            <li ref={Option2} onClick={(e) => checkAns(e, 2)}>{question.option2}</li>
-            <li ref={Option3} onClick={(e) => checkAns(e, 3)}>{question.option3}</li>
-            <li ref={Option4} onClick={(e) => checkAns(e, 4)}>{question.option4}</li>
-          </ul>
-          <button onClick={next}>{translations[language].next}</button>
-          <div className="index">{index + 1} of {data[language].length} questions</div>
-        </>
-      }
+    <div className='container' style={storedStatus ? {borderColor:'#e7a604'} : {}}>
+      <div className="wrapper">
+        <h1>{translations[language].quizTitle}</h1>
+        <hr />
+        {result ? 
+          <>    
+            <h2>{translations[language].score} {score}{translations[language].outOf} {selectedQuestions.length}</h2>
+            <button onClick={reset}>{translations[language].reset}</button>
+            {incorrectAnswers.length === 0 ? (
+              <div className="congrats-message incorrect-answers">
+                <h3>{translations[language].congrats}</h3>
+                <img src={Crown} alt="" />
+              </div>
+            ) : (
+              <div className="incorrect-answers" >
+                <h3>{translations[language].incorrectAnswers}</h3>
+                <ul>
+                  {incorrectAnswers.map((item, index) => (
+                    <li key={index} id='li'>
+                      <p className='question'><strong>Question:</strong> {item.question}</p>
+                      <p id='red' className='answer'><strong>Your Answer:</strong> <br /> {item.selected}</p>
+                      <p id='green' className='answer'><strong>Correct Answer:</strong> <br /> {item.correct}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </> :
+          <div className='relative'>
+            <h2>{index + 1}. {question.question}</h2>
+            <ul>
+              <li ref={Option1} onClick={(e) => checkAns(e, 1)}>{question.option1}</li>
+              <li ref={Option2} onClick={(e) => checkAns(e, 2)}>{question.option2}</li>
+              <li ref={Option3} onClick={(e) => checkAns(e, 3)}>{question.option3}</li>
+              <li ref={Option4} onClick={(e) => checkAns(e, 4)}>{question.option4}</li>
+            </ul>
+            <button onClick={next}>{translations[language].next}</button>
+            <div className="index">{index + 1} of {selectedQuestions.length} questions</div>
+          </div>
+        }
+      </div>
     </div>
   );
-}
+  
+};
 
 export default Quiz;

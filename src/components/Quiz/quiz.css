@@ -1,26 +1,74 @@
-.container {
+.container{
     width: 98%;
     max-width: 640px;
-    margin: auto;
+    margin: 20px auto 0;
     margin-top: 20px;
-    background: white;
-    color: #262626;
+    border: 0.2rem solid var(--color-tertiary);
+    background: rgba(21, 28, 39, 0.4);
+    backdrop-filter: blur(0.25rem);
     display: flex;
     flex-direction: column;
     gap: 20px;
     border-radius: 10px;
     padding: 20px 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: var(--white);
+    z-index: 100;
+    overflow: hidden;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.container input[type="text"] {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid var(--color-tertiary);
+    border-radius: 8px;
+    background: rgba(21, 28, 39, 0.6);
+    color: var(--white);
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.container input[type="text"]:focus {
+    border-color: var(--color-primary);
+    background: rgba(21, 28, 39, 0.8);
+}
+
+.container input[type="text"]::placeholder {
+    color: var(--color-extra);
+    font-style: italic;
+}
+
+.height{
+    height: 100vh;
 }
 
 .language-title {
     text-align: center;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
 }
 
 .language-container{
     gap: 1rem;
 }
-
 
 .container hr {
     height: 2px;
@@ -29,8 +77,11 @@
 }
 
 .container h2 {
+    width: clamp(60%, 90%, 90%);
     font-size: 24px;
     font-weight: 500;
+    margin: 1rem auto;
+    text-align: center;
 }
 
 .container ul {
@@ -51,11 +102,15 @@
 }
 
 .container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: auto;
+    margin-bottom: 10px;
     width: 200px;
     height: 50px;
-    background: #553f9a;
-    color: white;
+    background: var(--color-primary);
+    color: var(--white);
     font-size: 18px;
     font-weight: 500;
     border-radius: 8px;
@@ -69,13 +124,90 @@
 }
 
 .container .correct {
-    background: #dffff2;
-    border-color: #00d397;
+    background: var(--bg-correct);
+    border-color: var(--color-primary);
 }
 
 .container .wrong {
-    background: #ffebeb;
-    border-color: #ff4a4a;
+    background: var(--bg-wrong);
+    border-color: var(--red);
+}
+
+/* Blur */
+
+.blur1 {
+    position: absolute;
+    z-index: -1;
+    top: -210px;
+    left: 0;
+    width: 36rem;
+}
+
+/* incorrect-answers styles */
+
+.incorrect-answers {
+    padding: 2.4rem 1.6rem;
+    background: rgba(21, 28, 39, 0.4);
+    border-radius: 1.2rem;
+    border: 0.2rem solid var(--color-tertiary);
+}
+
+.incorrect-answers h3 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+    text-align: center;
+}
+
+.red {
+    color: var(--red);
+}
+
+.incorrect-answers ul {
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+}
+
+#li {
+    height: fit-content;
+}
+
+.incorrect-answers ul li {
+    background: var(--color-secondary);
+    border: none !important;
+    border-radius: 0.8rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.incorrect-answers .question {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.incorrect-answers .answer {
+    text-align: center;
+    max-width: 400px;
+    font-size: 1.6rem;
+    margin: 0.5rem 0;
+}
+
+.incorrect-answers .answer strong {
+    color: var(--white);
+}
+
+#red {
+    color: var(--red);
+}
+
+#green {
+    color: var(--color-primary);
 }
 
 @media (min-width: 480px) {
@@ -119,3 +251,4 @@
         font-size: 18px;
     }
 }
+

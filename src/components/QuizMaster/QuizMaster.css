@@ -1,0 +1,15 @@
+.masterDetails{
+}
+.masterLi{
+    display: grid;
+    grid-template-columns: 1fr .1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.tick{
+    color: rgb(231, 166, 4);
+    font-size: x-large;
+}
