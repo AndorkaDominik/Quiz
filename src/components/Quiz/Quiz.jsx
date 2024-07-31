@@ -21,6 +21,7 @@ const Quiz = () => {
   const [result, setResult] = useState(false);
   const [language, setLanguage] = useState(null);
   const [category, setCategory] = useState("");
+  const [showCategory, setShowCategory] = useState(false);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
   const [name, setName] = useState('');
@@ -195,12 +196,13 @@ const Quiz = () => {
         eng={translations.ENG.english}
         ger={translations.GER.german}
         selectLanguage={selectLanguage}
+        setShowCategory={setShowCategory}
       />
     );
   }
 
   
-  if (!category) {
+  if (!category || showCategory) {
     return (
       <Category 
         quizTitle={translations[language].quizTitle}
@@ -211,18 +213,19 @@ const Quiz = () => {
         currentLanguage={language}
         setShowProfile={setShowProfile}
         setCategory={setCategory}
+        setShowCategory={setShowCategory}
       />
     );
 
     
   }
   
-  if (!showProfile) {
+  if (showProfile && !showCategory) {
     return (
       <Profile
         translations={translations[language]}
         handleNameChange={handleNameChange}
-        goBack={() =>{ setShowProfile(true); setCategory('')}}
+        goBack={() =>{ setShowProfile(false); setShowCategory(true)}}
       />
     );
   }
