@@ -7,6 +7,8 @@ import './Category.css'
 import Footer from '../Footer/Footer'
 import Award from '../Award/Award';
 import QuizMaster from '../QuizMaster/QuizMaster';
+import LatestQuiz from '../Latest/Latest'; 
+
 
 
 import { GoArrowRight } from "react-icons/go";
@@ -34,7 +36,7 @@ import MakeUp from '../../assets/Category/makeUp.svg';
 // Logo
 import Logo from '../../assets/logo.svg'
 
-const Category = ({quizTitle, name, handleCategorySelect, handleNameChange, handleLanguageChange, currentLanguage, translations}) => {
+const Category = ({quizTitle, name, handleCategorySelect, handleNameChange, handleLanguageChange, currentLanguage, translations, setShowProfile, setCategory}) => {
 
   const storedName = localStorage.getItem("name");
   const storedLanguage = localStorage.getItem("language");
@@ -51,7 +53,8 @@ const Category = ({quizTitle, name, handleCategorySelect, handleNameChange, hand
             <option value="ENG">Eng</option>
             <option value="GER">Ger</option>
           </select>
-          <button onClick={handleNameChange}>{translations.logOut}</button>
+          
+          <button onClick={() => { setShowProfile(false); setCategory('profile'); }}>Profile</button>
         </div>
         </nav>
         <div className="content-wrapper">
@@ -87,6 +90,8 @@ const Category = ({quizTitle, name, handleCategorySelect, handleNameChange, hand
               </button>
             </div>
           </div>
+
+
 
           <h3>Recently Added</h3>
           <div className='single-wrapper'>
@@ -160,7 +165,12 @@ const Category = ({quizTitle, name, handleCategorySelect, handleNameChange, hand
           </div>
           {storedStatus ? <QuizMaster translations={translations} /> : <Award translations={translations}/>}
         </div>
+
+          <br />
         
+
+
+
         <Footer></Footer>
 
       </div>

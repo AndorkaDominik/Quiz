@@ -42,6 +42,25 @@ export const translations = {
     food: "food",
     makeUp: "Make Up",
 
+    // Profile component
+    profileTitle: "Profile",
+    nameFormLabel: "Name",
+    nameFormButton: "Update Name",
+    languageFormLabel: "Language",
+    languageFormButton: "Update Language",
+    homePageButton: "Back To Homepage",
+    toastNamePlaceholder: "Nickname Changed!",
+    toastLanguagePlaceholder: "Lang Changed!",
+
+
+    // Latest component
+    score: "Score",
+    category: "Category",
+    question: "Question",
+    yourAnswer: "Your answer",
+    correctAnswer: "Correct answer",
+    latestQuizTitle: "Your Last Quiz Results",
+
     // Award component
     awardLeftTitle: "Unlock a Mysterious Award!",
     awardLeftDescription: "The mysterious award could be anything from exclusive content, a unique badge, to a special discount or even a gift card! Only those who achieve perfection will find out.",
@@ -100,6 +119,24 @@ export const translations = {
     fish: "Halak",
     food: "Étel",
     makeUp: "Smink",
+
+    // Profile component
+    profileTitle: "Profil",
+    nameFormLabel: "Név",
+    nameFormButton: "Név frissítése",
+    languageFormLabel: "Nyelv",
+    languageFormButton: "Nyelv frissítése",
+    homePageButton: "Vissza a Főoldalra",
+    toastNamePlaceholder: "Becenév megváltozott!",
+    toastLanguagePlaceholder: "Nyelv megváltozott!",
+
+    // Latest component
+    score: "Pontszám",
+    category: "Kategória",
+    question: "Kérdés",
+    yourAnswer: "A te válaszod",
+    correctAnswer: "Helyes válasz",
+    latestQuizTitle: "Legutóbbi Kvíz Eredményeid",
 
     // Award component
     awardLeftTitle: "Fedezz fel egy rejtélyes díjat!",
@@ -161,6 +198,25 @@ export const translations = {
     fish: "Fische",
     food: "Essen",
     makeUp: "Make-up",
+
+    // Profile component
+    profileTitle: "Profil",
+    nameFormLabel: "Name",
+    nameFormButton: "Name aktualisieren",
+    languageFormLabel: "Sprache",
+    languageFormButton: "Sprache aktualisieren",
+    homePageButton: "Zurück zur Startseite",
+    toastNamePlaceholder: "Spitzname geändert!",
+    toastLanguagePlaceholder: "Sprache geändert!",
+
+
+    // Latest component
+    score: "Punkte",
+    category: "Kategorie",
+    question: "Frage",
+    yourAnswer: "Ihre Antwort",
+    correctAnswer: "Richtige Antwort",
+    latestQuizTitle: "Ihre Letzten Quiz Ergebnisse",
 
     // Award component
     awardLeftTitle: "Schalte einen geheimnisvollen Preis frei!",

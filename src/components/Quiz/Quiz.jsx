@@ -7,6 +7,7 @@ import { categories, translations } from '../../assets/data';
 import Name from '../Name/Name';
 import Language from '../Language/Language';
 import Category from '../Category/Category';
+import Profile from '../Profile/Profile';
 
 /// Quiz Master Reward
 import Crown from '../../assets/crown.svg';
@@ -24,6 +25,7 @@ const Quiz = () => {
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
   const [name, setName] = useState('');
   const [quizMaster, setQuizMaster] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
   const Option1 = useRef(null);
   const Option2 = useRef(null);
@@ -94,6 +96,13 @@ const Quiz = () => {
   };
 
   const reset = () => {
+    localStorage.setItem('latestQuiz', JSON.stringify({
+      score: score,
+      incorrectAnswers: incorrectAnswers,
+      category: category,
+      currentQuestionIndex: index
+    }));
+
     setIndex(0);
     setQuestion(null);
     setScore(0);
@@ -120,6 +129,7 @@ const Quiz = () => {
     localStorage.removeItem('language');
     setQuizMaster(false);
     localStorage.removeItem('quizMaster');
+    localStorage.removeItem('latestQuiz');
   }
 
   const handleLanguageChange = (e) => {
@@ -146,6 +156,10 @@ const Quiz = () => {
     });
   };
 
+  const storedName = localStorage.getItem('name');
+  const storedLanguage = localStorage.getItem('language');
+  const storedQuizMaster = localStorage.getItem('quizMaster');
+
    useEffect(() => {
     const storedName = localStorage.getItem('name');
     const storedLanguage = localStorage.getItem('language');
@@ -156,8 +170,13 @@ const Quiz = () => {
     if (storedQuizMaster === 'true') setQuizMaster(true);
   }, [name, language, quizMaster]);
 
-  const storedStatus = localStorage.getItem('quizMaster');
+  useEffect(() => {
+    if (storedName) setName(storedName);
+    if (storedLanguage) setLanguage(storedLanguage);
+    if (storedQuizMaster === 'true') setQuizMaster(true);
+  }, [storedName, storedLanguage, storedQuizMaster]);
 
+  const storedStatus = localStorage.getItem('quizMaster');
 
   if (!name) {
     return (
@@ -180,6 +199,7 @@ const Quiz = () => {
     );
   }
 
+  
   if (!category) {
     return (
       <Category 
@@ -190,10 +210,24 @@ const Quiz = () => {
         handleNameChange={handleNameChange}
         handleLanguageChange={handleLanguageChange} 
         currentLanguage={language}
+        setShowProfile={setShowProfile}
+        setCategory={setCategory}
+      />
+    );
+
+    
+  }
+  
+  if (!showProfile) {
+    return (
+      <Profile
+        translations={translations[language]}
+        handleNameChange={handleNameChange}
+        goBack={() =>{ setShowProfile(true); setCategory('')}}
       />
     );
   }
-  
+
   return (
     <div className='container' style={storedStatus ? {borderColor:'#e7a604'} : {}}>
       <div className="wrapper">
