@@ -207,7 +207,6 @@ const Quiz = () => {
         translations={translations[language]}
         name={name}
         handleCategorySelect={handleCategorySelect}
-        handleNameChange={handleNameChange}
         handleLanguageChange={handleLanguageChange} 
         currentLanguage={language}
         setShowProfile={setShowProfile}

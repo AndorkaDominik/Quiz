@@ -36,7 +36,7 @@ import MakeUp from '../../assets/Category/makeUp.svg';
 // Logo
 import Logo from '../../assets/logo.svg'
 
-const Category = ({quizTitle, name, handleCategorySelect, handleNameChange, handleLanguageChange, currentLanguage, translations, setShowProfile, setCategory}) => {
+const Category = ({quizTitle, name, handleCategorySelect,  handleLanguageChange, currentLanguage, translations, setShowProfile, setCategory}) => {
 
   const storedName = localStorage.getItem("name");
   const storedLanguage = localStorage.getItem("language");
@@ -54,7 +54,7 @@ const Category = ({quizTitle, name, handleCategorySelect, handleNameChange, hand
             <option value="GER">Ger</option>
           </select>
           
-          <button onClick={() => { setShowProfile(false); setCategory('profile'); }}>Profile</button>
+          <button onClick={() => { setShowProfile(false); setCategory('profile'); }}>{translations.profileTitle}</button>
         </div>
         </nav>
         <div className="content-wrapper">

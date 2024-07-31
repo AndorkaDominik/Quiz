@@ -1,4 +1,3 @@
-// Profile.js
 import React, { useState, useEffect } from 'react';
 import './Profile.css'; 
 
@@ -6,7 +5,6 @@ import LatestQuiz from '../Latest/Latest';
 import Footer from '../Footer/Footer';
 
 import blur1 from '../../assets/Blur/blur-1.svg';
-
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
