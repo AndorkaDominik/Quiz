@@ -42,6 +42,12 @@ const Category = ({quizTitle, name, handleCategorySelect,  handleLanguageChange,
   const storedLanguage = localStorage.getItem("language");
   const storedStatus = localStorage.getItem('quizMaster');
 
+  const handleProfileClick = () => {
+    console.log("Opening profile...");
+    setShowProfile(true);
+    setShowCategory(false);
+  };
+
   return (
     <div className='category-container relative'>
        
@@ -54,7 +60,7 @@ const Category = ({quizTitle, name, handleCategorySelect,  handleLanguageChange,
             <option value="GER">Ger</option>
           </select>
           
-          <button onClick={() => { setShowProfile(true); setShowCategory(false)}}>{translations.profileTitle}</button>
+          <button onClick={handleProfileClick}>{translations.profileTitle}</button>
         </div>
         </nav>
         <div className="content-wrapper">

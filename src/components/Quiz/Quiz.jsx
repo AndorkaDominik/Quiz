@@ -110,6 +110,7 @@ const Quiz = () => {
     setLock(false);
     setResult(false);
     setCategory("");
+    setShowCategory(true)
     scrollToTop();
   };
 
@@ -148,6 +149,7 @@ const Quiz = () => {
     setQuestion(questions[0]);
     setIndex(0);
     setIncorrectAnswers([]);
+    setShowCategory(false)
     scrollToTop();
   };
 
@@ -202,6 +204,17 @@ const Quiz = () => {
   }
 
   
+  if (showProfile && !showCategory) {
+    return (
+      <Profile
+        translations={translations[language]}
+        handleNameChange={handleNameChange}
+        goBack={() =>{ setShowProfile(false); setShowCategory(true)}}
+      />
+    );
+  }
+
+
   if (!category || showCategory) {
     return (
       <Category 
@@ -220,15 +233,6 @@ const Quiz = () => {
     
   }
   
-  if (showProfile && !showCategory) {
-    return (
-      <Profile
-        translations={translations[language]}
-        handleNameChange={handleNameChange}
-        goBack={() =>{ setShowProfile(false); setShowCategory(true)}}
-      />
-    );
-  }
 
   return (
     <div className='container' style={storedStatus ? {borderColor:'#e7a604'} : {}}>
