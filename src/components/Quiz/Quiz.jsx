@@ -75,7 +75,7 @@ const Quiz = () => {
     if (index === selectedQuestions.length - 1) {
       setResult(true);
 
-       const categoryStats = JSON.parse(localStorage.getItem('categoryStats')) || {};
+      const categoryStats = JSON.parse(localStorage.getItem('categoryStats')) || {};
       const categoryData = categoryStats[category] || { lastScore: 0, bestScore: 0, attempts: 0 };
       categoryData.lastScore = score;
       categoryData.bestScore = Math.max(categoryData.bestScore, score);
