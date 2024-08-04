@@ -51,6 +51,12 @@ export const translations = {
     homePageButton: "Back To Homepage",
     toastNamePlaceholder: "Nickname Changed!",
     toastLanguagePlaceholder: "Lang Changed!",
+    categoryStatsTitle: "Your Category Stats",
+    categoryStatsNote:"Note: Click on the title to sort the category stats.",
+    category: "Category",
+    lastScore: "Last",
+    bestScore: "Best",
+    attempts: "Attempts",
 
 
     // Latest component
@@ -129,6 +135,12 @@ export const translations = {
     homePageButton: "Vissza a Főoldalra",
     toastNamePlaceholder: "Becenév megváltozott!",
     toastLanguagePlaceholder: "Nyelv megváltozott!",
+    categoryStatsTitle: "Az Ön kategória eredményei",
+    categoryStatsNote:"Megjegyzés: Kattintson a címre a kategóriastatisztikák rendezéséhez.",
+    category: "Kategória",
+    lastScore: "Utolsó",
+    bestScore: "Legjobb",
+    attempts: "Próba",
 
     // Latest component
     score: "Pontszám",
@@ -208,6 +220,12 @@ export const translations = {
     homePageButton: "Zurück zur Startseite",
     toastNamePlaceholder: "Spitzname geändert!",
     toastLanguagePlaceholder: "Sprache geändert!",
+    categoryStatsTitle: "Ihre Kategorie Ergebnisse",
+    categoryStatsNote:"Hinweis: Klicken Sie auf den Titel, um die Kategoriestatistiken zu sortieren.",
+    category: "Kategorie",
+    lastScore: "Letzte",
+    bestScore: "Beste",
+    attempts: "Versuche",
 
 
     // Latest component

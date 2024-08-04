@@ -75,6 +75,14 @@ const Quiz = () => {
     if (index === selectedQuestions.length - 1) {
       setResult(true);
 
+       const categoryStats = JSON.parse(localStorage.getItem('categoryStats')) || {};
+      const categoryData = categoryStats[category] || { lastScore: 0, bestScore: 0, attempts: 0 };
+      categoryData.lastScore = score;
+      categoryData.bestScore = Math.max(categoryData.bestScore, score);
+      categoryData.attempts += 1;
+      categoryStats[category] = categoryData;
+      localStorage.setItem('categoryStats', JSON.stringify(categoryStats));
+
       if (score === selectedQuestions.length) {
         localStorage.setItem('quizMaster', 'true');
         setQuizMaster(true);
@@ -132,6 +140,7 @@ const Quiz = () => {
     setQuizMaster(false);
     localStorage.removeItem('quizMaster');
     localStorage.removeItem('latestQuiz');
+    localStorage.removeItem('categoryStats');
   }
 
   const handleLanguageChange = (e) => {

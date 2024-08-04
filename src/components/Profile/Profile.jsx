@@ -20,6 +20,24 @@ const Profile = ({goBack, translations, handleNameChange}) => {
     const toastNamePlaceholder = translations.toastNamePlaceholder;
     const toastLanguagePlaceholder = translations.toastLanguagePlaceholder;
 
+    // Save category stats and load
+    const categoryStats = JSON.parse(localStorage.getItem('categoryStats')) || {};
+    const categories = Object.keys(categoryStats).length > 0 ? categoryStats : {
+        No: { lastScore: "Tries", bestScore: "Added", attempts: "Yet" }
+    };
+
+    // Sorting part
+    const [sortCriteria, setSortCriteria] = useState('bestScore');
+    const [sortOrder, setSortOrder] = useState('asc');
+
+    const sortedCategories = Object.keys(categories).sort((a, b) => {
+        if (sortOrder === 'asc') {
+            return categories[a][sortCriteria] - categories[b][sortCriteria];
+        } else {
+            return categories[b][sortCriteria] - categories[a][sortCriteria];
+        }
+    });
+
     const notifyName = () => toast.success(`${toastNamePlaceholder}`, {
         position: "top-right",
         autoClose: 5000,
@@ -41,6 +59,8 @@ const Profile = ({goBack, translations, handleNameChange}) => {
         theme: "dark",
     });
 
+    // Handling functions
+
    const handleNameUpdate = (e) => {
     e.preventDefault();
     localStorage.setItem('name', newName);
@@ -50,6 +70,12 @@ const Profile = ({goBack, translations, handleNameChange}) => {
     e.preventDefault();
     localStorage.setItem('language', newLanguage);
   };
+
+  const handleSort = (criteria) => {
+    setSortCriteria(criteria);
+    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  };
+
 
   return (
     <>
@@ -95,6 +121,33 @@ const Profile = ({goBack, translations, handleNameChange}) => {
                 <button onClick={goBack} className='profileBtn'>{translations.homePageButton}</button>
                 <button onClick={handleNameChange} className='profileBtn'>{translations.logOut}</button>
             </div>
+
+            
+        </div>
+
+        <div className="category-stats" >
+            <h2>{translations.categoryStatsTitle}</h2>
+            <p>{translations.categoryStatsNote}</p>
+            <table>
+                <thead>
+                <tr>
+                    <th>{translations.category}</th>
+                    <th onClick={() => handleSort('lastScore')}>{translations.lastScore}</th>
+                    <th onClick={() => handleSort('bestScore')}>{translations.bestScore}</th>
+                    <th onClick={() => handleSort('attempts')}>{translations.attempts}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {sortedCategories.map((category) => (
+                    <tr key={category}>
+                    <td className='capitalize'>{category}</td>
+                    <td>{categories[category].lastScore}</td>
+                    <td>{categories[category].bestScore}</td>
+                    <td>{categories[category].attempts}</td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
         </div>
 
         <LatestQuiz translations={translations} /> 

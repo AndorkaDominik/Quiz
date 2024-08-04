@@ -172,3 +172,109 @@
         font-size: 22px;
     }
 }
+
+.category-stats h2{
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.category-stats p{
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    color: var(--white);
+    opacity: .8;
+    max-width: 300px;
+    margin: 0 auto;
+}
+.category-stats table {
+    border-radius: 10px;
+    border: 0.2rem solid var(--color-tertiary);
+    overflow: hidden;
+    color: var(--bg-body);
+    width: 98%;
+    border-collapse: collapse;
+    margin-top: 10px;
+
+    max-width: 640px;
+    margin: 20px auto;
+    border: 0.2rem solid var(--color-tertiary);
+    background: rgba(21, 28, 39, 0.4);
+    backdrop-filter: blur(0.25rem);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: var(--white);
+    overflow: hidden;
+}
+
+.category-stats th,
+.category-stats td {
+    font-weight: normal;
+    border: 1px solid var(--color-tertiary);
+    padding: 8px;
+    color: var(--white);
+    text-align: center;
+}
+
+.category-stats th:first-child{
+    cursor: default;
+}
+
+.category-stats th{
+    cursor: pointer;
+    color: var(--black);
+}
+
+.category-stats td:first-child{
+    text-align: left;
+}
+.category-stats th {
+    background-color: var(--white);
+    backdrop-filter: blur(0.25rem);
+    text-align: center;
+}
+
+.category-stats tr:nth-child(even) {
+    background: var(--color-tertiary);
+    backdrop-filter: blur(0.25rem);
+}
+
+.category-stats tr:hover {
+}
+
+@media (max-width: 460px) {
+    .category-stats table th:nth-child(4),
+    .category-stats table td:nth-child(4) {
+        display: none;
+    }
+}
+
+@media (max-width: 350px) {
+    .category-stats h2 {
+        font-size: 1.3rem;
+    }
+    .category-stats p{
+        font-size: small;
+    }
+    .category-stats table{
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 250px) {
+   
+    .category-stats td{
+        padding: 3px;
+    }
+    .category-stats table {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 250px) {
+    .category-stats td {
+        padding: 2px;
+    }
+}

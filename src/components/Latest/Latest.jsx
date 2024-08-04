@@ -7,7 +7,7 @@ const LatestQuiz = ({ translations }) => {
     useEffect(() => {
         const storedQuiz = localStorage.getItem('latestQuiz');
         if (storedQuiz) {
-        setLatestQuiz(JSON.parse(storedQuiz));
+          setLatestQuiz(JSON.parse(storedQuiz));
         }
     }, []);
 
