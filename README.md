@@ -1,40 +1,94 @@
-# Quiz Component (MAIN Component)
+# Quiz App
 
-The Quiz component is a React-based quiz application that supports multiple languages. Users can select a language, answer questions, and view their score at the end of the quiz.
+A dynamic and interactive quiz application built with React. This application allows users to select their preferred language and quiz category, answer questions, and track their performance over time.
 
-![Clock App Screenshot](./.github/screen.png)
+## Features
 
-## Functionality
+- **Multi-Language Support**: Users can select from multiple languages (English, Hungarian, German).
+- **Category Selection**: Users can choose from a variety of quiz categories.
+- **Question Randomization**: Questions are randomly selected from the chosen category.
+- **Score Tracking**: Users' scores are tracked and stored in local storage.
+- **Profile Management**: Users can update their name and preferred language, view their quiz statistics, and log out.
 
-### useState Hooks
 
-- **index**: Tracks the current question index.
-- **question**: Holds the current question object.
-- **lock**: Prevents multiple answers for a single question.
-- **score**: Tracks the user's score.
-- **result**: Indicates if the quiz has ended.
-- **language**: Stores the selected language.
+## Game Overview
 
-### useRef Hooks
+The Quiz App provides an engaging and educational experience where users can test their knowledge across various topics. Upon launching the app, users are prompted to enter their name and select their preferred language and quiz category. The game features a series of questions, each with multiple-choice answers. Users must select the correct answer to score points.
 
-- **Option1, Option2, Option3, Option4**: References for each option to handle user interaction.
+### Key Elements of the Game
 
-### Functions
+- **Questions**: Each question is presented with multiple answer options. Only one of these options is correct.
+- **Timer**: A timer can be implemented to add an element of urgency and challenge.
+- **Immediate Feedback**: After selecting an answer, users receive immediate feedback on whether their choice was correct or incorrect.
+- **Score Calculation**: Correct answers earn points, which are tallied up to determine the final score.
+- **Results Display**: At the end of the quiz, users are shown their total score and detailed feedback on any incorrect answers.
 
-- **selectLanguage(lang)**: Sets the selected language and loads the first question in that language.
-- **checkAns(e, ans)**: Checks the selected answer against the correct answer. Updates the score if correct and provides immediate feedback.
+## Achievements: Quiz Master Title
 
-- **next()**: Moves to the next question when the "Next" button is clicked. If on the last question, displays the final score.
+The Quiz App features a special achievement system to reward dedicated users. One of the most prestigious achievements is the **Quiz Master** title.
 
-- **reset()**: Resets the quiz to the initial state, allowing users to start over.
+### How to Achieve Quiz Master Status
 
-## Conditional Rendering
+To earn the Quiz Master title, a user must consistently demonstrate exceptional knowledge and performance. The criteria include:
 
-If no language is selected, renders language selection buttons (English, Hungarian, German).
+1. **High Score Threshold**: Achieve a score of 90% or higher in at least five different quiz categories.
+2. **Consistency**: Maintain an average score of 80% or above across all attempts.
+3. **Completion Rate**: Successfully complete a minimum of 20 quizzes.
+4. **Languages**: Achieve high scores in quizzes taken in at least two different languages.
 
-Once a language is selected, renders:
+### Benefits of Quiz Master Title
 
-- Quiz title
-- Current question with options
-- Next button to proceed to the next question
-- Score and reset button when all questions are answered
+- **Recognition**: A special **Quiz Master** icon (crown.svg) is displayed next to the user’s name in their profile.
+- **Exclusive Content**: Access to exclusive quiz categories and questions not available to regular users.
+- **Leaderboard**: Priority placement on the app’s leaderboard, highlighting top-performing users.
+
+### Tracking Progress
+
+Users can track their progress towards achieving the Quiz Master title in their profile section. The profile displays:
+
+- **Completed Quizzes**: List of quizzes completed with scores.
+- **Achievements**: Overview of earned achievements and progress towards new ones.
+- **Statistics**: Detailed statistics including average scores, highest scores, and quiz completion rates.
+
+
+
+## Components Overview
+
+### `Quiz`
+
+Handles the main quiz functionality including:
+- Displaying questions and options.
+- Checking answers and updating scores.
+- Navigating between questions.
+- Displaying results at the end of the quiz.
+
+### `Category`
+
+Handles the display and selection of quiz categories. It also manages the transition to the quiz component once a category is selected.
+
+### `Profile`
+
+Displays user profile information and quiz statistics. Allows users to update their name and language, and provides an option to log out.
+
+## Local Storage Usage
+
+The application makes extensive use of local storage to persist user data, including:
+- User name and language preference.
+- Quiz scores and statistics.
+- Quiz master status.
+
+## Random Question Selection
+
+The function `getRandomQuestions` in `Quiz` component shuffles and selects a subset of questions from the chosen category to ensure each quiz attempt is unique.
+
+## Answer Checking and Score Updating
+
+The `checkAns` function handles answer validation, updates the score, and highlights correct and incorrect answers.
+
+## Result Display
+
+After the user completes the quiz, their score is displayed along with a detailed list of incorrect answers, if any.
+
+## Profile Management
+
+The `Profile` component allows users to view and update their name and language preferences, view their quiz statistics, and log out. It also provides sorting options for viewing quiz statistics based on different criteria.
