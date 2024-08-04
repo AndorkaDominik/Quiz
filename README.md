@@ -91,4 +91,4 @@ After the user completes the quiz, their score is displayed along with a detaile
 
 ## Profile Management
 
-The `Profile` component allows users to view and update their name and language preferences, view their quiz statistics, and log out. It also provides sorting options for viewing quiz statistics based on different criteria.
+The `Profile` component allows users to view and update their name and language preferences, view their quiz statistics, and log out. It also provides sorting options for viewing quiz statistics based on different criteria. 
