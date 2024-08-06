@@ -2,6 +2,15 @@
 
 A dynamic and interactive quiz application built with React. This application allows users to select their preferred language and quiz category, answer questions, and track their performance over time.
 
+![Quiz App Preview](./.github/quiz%20app%20preview.gif)
+
+<h3 align="center">
+    <strong>
+      <code>&nbsp;<a href="https://andorkadominik.github.io/Quiz/">Access Here</a>&nbsp;</code>
+    </strong>
+</h3>
+
+
 ## Features
 
 - **Multi-Language Support**: Users can select from multiple languages (English, Hungarian, German).
@@ -24,6 +33,8 @@ The Quiz App provides an engaging and educational experience where users can tes
 - **Results Display**: At the end of the quiz, users are shown their total score and detailed feedback on any incorrect answers.
 
 ## Achievements: Quiz Master Title
+
+![Quiz Master title](./.github/quiz%20master.png)
 
 The Quiz App features a special achievement system to reward dedicated users. One of the most prestigious achievements is the **Quiz Master** title.
 
