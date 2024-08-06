@@ -2,7 +2,7 @@
 
 A dynamic and interactive quiz application built with React. This application allows users to select their preferred language and quiz category, answer questions, and track their performance over time.
 
-![Quiz App Preview](./.github/quiz%20app%20preview.gif)
+![Quiz App Preview](./.github/home.png)
 
 <h3 align="center">
     <strong>
@@ -34,9 +34,10 @@ The Quiz App provides an engaging and educational experience where users can tes
 
 ## Achievements: Quiz Master Title
 
-![Quiz Master title](./.github/quiz%20master.png)
 
 The Quiz App features a special achievement system to reward dedicated users. One of the most prestigious achievements is the **Quiz Master** title.
+
+![Quiz Master title](./.github/quiz%20master.png)
 
 ### How to Achieve Quiz Master Status
 
