@@ -272,7 +272,7 @@ const Quiz = () => {
               </div>
             )}
           </> :
-          <div className='relative'>
+          <div className='relative quiz-container'>
             <h2>{index + 1}. {question.question}</h2>
             <ul>
               <li ref={Option1} onClick={(e) => checkAns(e, 1)}>{question.option1}</li>
