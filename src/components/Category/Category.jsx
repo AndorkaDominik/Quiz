@@ -52,7 +52,7 @@ const Category = ({quizTitle, name, handleCategorySelect,  handleLanguageChange,
     <div className='category-container relative'>
        
         <nav>
-        <h1 className='language-title'><img src={Logo} alt="" id='nav-img' /> <span>{quizTitle}</span> </h1>
+        <h1 className='language-title'><img src={Logo} alt="" id='nav-img' /> {quizTitle} </h1>
         <div className="btn-container">
           <select  value={storedLanguage ? storedLanguage : currentLanguage} onChange={handleLanguageChange}>
             <option value="HUN">Hun</option>
@@ -64,7 +64,7 @@ const Category = ({quizTitle, name, handleCategorySelect,  handleLanguageChange,
         </div>
         </nav>
         <div className="content-wrapper">
-        <h3>Hello, {storedName ? storedName : name} 👋</h3>
+        <h3>Hello, {storedName ? storedName : name} <span className='hand'>👋</span></h3>
         {storedStatus ? <h2 className='quizMaster'>{translations.quizMasterTitle}</h2> : <h2>{translations.playTitle}</h2>}
         
           <div className="bg-blur">

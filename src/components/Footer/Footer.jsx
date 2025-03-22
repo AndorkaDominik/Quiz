@@ -3,7 +3,7 @@ import "./Footer.css"
 const Footer = () => {
   return (
     <footer>
-        <a href="https://github.com/AndorkaDominik" target='_blank'>Developed by: Andorka Dominik</a>
+        <a href="https://andorkadominik.hu" target='_blank'>Developed by: Andorka Dominik</a>
     </footer>
   )
 }

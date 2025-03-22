@@ -5,3 +5,37 @@
 .wrapper .language-container h3.language-title{
     margin-top: 0;
 }
+
+.language-container .btn-container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.language-container .language-title{
+    display: block;
+}
+
+.language-title span{
+    background: -webkit-linear-gradient(30deg, #43cea2, #185a9d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h3.language-title{
+    color: var(--muted);
+}
+
+@media screen and (max-width: 408px){
+    .language-container .btn-container{
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 300px){
+    .language-title{
+        font-size: 1.4rem;
+    }
+    
+}

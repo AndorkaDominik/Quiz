@@ -15,4 +15,5 @@ footer a {
     font-size: medium;
     color: var(--white);
     transition: 0.3s ease-in;
+    margin-bottom: 1rem;
 }

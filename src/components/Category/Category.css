@@ -76,6 +76,10 @@ nav .btn-container button {
     border-radius: 20px;
     overflow: hidden;
     margin-top: 64px;
+    user-select: none;
+    --webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .category-container .left {
@@ -86,6 +90,37 @@ nav .btn-container button {
     padding: 30px;
     align-items: center;
     justify-content: center;
+}
+
+.content-wrapper h3 .hand{
+    display: inline-block;
+    animation: wave .8s ease-in;
+}
+
+@keyframes wave {
+    0% {
+        rotate:  -25deg;
+    }
+
+    20% {
+        rotate: 0deg;
+    }
+
+    40% {
+        rotate: 15deg;
+    }
+
+    60% {
+        rotate: 0deg;
+    }
+
+    80% {
+        rotate: -15deg;
+    }
+
+    100% {
+        rotate: 0deg;
+    }
 }
 
 .right {
