@@ -4,7 +4,7 @@ nav {
     justify-content: space-between;
     padding: 20px 1%;
     color: var(--white);
-    border-bottom: 2px solid #3c3c3c;
+    border-bottom: 2px solid var(--color-tertiary);
 }
 
 nav select {
